@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{css/layout.css}">
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <h3 align="center">Student Grade</h3>
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th>학년</th>
+            <th>반</th>
+            <th>번호</th>
+            <th>이름</th>
+            <th>국어</th>
+            <th>수학</th>
+            <th>영어</th>
+            <th>역사</th>
+            <th>합계</th>
+            <th>평균</th>
+            <th>석차</th>
+        </tr>
+        <tr th:each="student : ${student}" th:object="${student}">
+            <td th:text="*{student_no.substring(0, 1)}">학년</td> <!-- 학년 -->
+            <td th:text="*{student_no.substring(1, 3)}">1반</td> <!-- 반 -->
+            <td th:text="*{student_no.substring(3, 5)}">번</td> <!-- 번호 -->
+<!--            10101-->
+            <td th:text="*{name}"></td>
+            <td th:text="*{examDto.kor}"></td>   <!-- 국어 -->
+            <td th:text="*{examDto.math}"></td>   <!-- 수학 -->
+            <td th:text="*{examDto.eng}"></td>   <!-- 영어 -->
+            <td th:text="*{examDto.hist}"></td>   <!-- 역사 -->
+            <td th:text="*{examDto.sum}"></td>   <!-- 합계 -->
+            <td th:text="*{examDto.avg}"></td>   <!-- 평균 -->
+            <td th:text="*{examDto.rank}"></td>   <!-- 석차 -->
+        </tr>
+        <tr>
+            <td align="center" colspan="4">총합</td>
+            <td th:text="${exam0.kor}"></td>
+            <td th:text="${exam0.math}"></td>
+            <td th:text="${exam0.eng}"></td>
+            <td th:text="${exam0.hist}"></td>
+            <td th:text="${exam0.sum}"></td>
+            <td th:text="${exam0.avg}"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">총평균</td>
+            <td th:text="${avgKor.avg}"></td>
+            <td th:text="${avgMath.avg}"></td>
+            <td th:text="${avgEng.avg}"></td>
+            <td th:text="${avgHist.avg}"></td>
+            <td th:text="${avgSum.avg}"></td>
+            <td th:text="${avg.avg}"></td>
+            <td></td>
+        </tr>
+
+
+
+    </table>
+
+    <a th:href="@{/school/main}">Back</a>
+</div>
+</body>
+</html>
